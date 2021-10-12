@@ -1,0 +1,575 @@
+{
+  "documentation": "https://opencagedata.com/api",
+  "licenses": [
+    {
+      "name": "see attribution guide",
+      "url": "https://opencagedata.com/credits"
+    }
+  ],
+  "rate": {
+    "limit": 2500,
+    "remaining": 2498,
+    "reset": 1634083200
+  },
+  "results": [
+    {
+      "annotations": {
+        "DMS": {
+          "lat": "56\u00b0 49' 12.62856'' N",
+          "lng": "24\u00b0 36' 26.93124'' E"
+        },
+        "MGRS": "35VLC5397699921",
+        "Maidenhead": "KO26ht26vu",
+        "Mercator": {
+          "x": 2739292.245,
+          "y": 7687660.247
+        },
+        "OSM": {
+          "edit_url": "https://www.openstreetmap.org/edit?way=40060471#map=16/56.82017/24.60748",
+          "note_url": "https://www.openstreetmap.org/note/new#map=16/56.82017/24.60748&layers=N",
+          "url": "https://www.openstreetmap.org/?mlat=56.82017&mlon=24.60748#map=16/56.82017/24.60748"
+        },
+        "UN_M49": {
+          "regions": {
+            "EUROPE": "150",
+            "LV": "428",
+            "NORTHERN_EUROPE": "154",
+            "WORLD": "001"
+          },
+          "statistical_groupings": [
+            "MEDC"
+          ]
+        },
+        "callingcode": 371,
+        "currency": {
+          "alternate_symbols": [],
+          "decimal_mark": ",",
+          "html_entity": "&#x20AC;",
+          "iso_code": "EUR",
+          "iso_numeric": "978",
+          "name": "Euro",
+          "smallest_denomination": 1,
+          "subunit": "Cent",
+          "subunit_to_unit": 100,
+          "symbol": "\u20ac",
+          "symbol_first": 0,
+          "thousands_separator": "."
+        },
+        "flag": "\ud83c\uddf1\ud83c\uddfb",
+        "geohash": "ud17pzy9eb5xtmdfhuy1",
+        "qibla": 156.12,
+        "roadinfo": {
+          "drive_on": "right",
+          "road": "Br\u012bv\u012bbas iela",
+          "speed_in": "km/h"
+        },
+        "sun": {
+          "rise": {
+            "apparent": 1634014140,
+            "astronomical": 1634006520,
+            "civil": 1634011860,
+            "nautical": 1634009220
+          },
+          "set": {
+            "apparent": 1634052360,
+            "astronomical": 1634059920,
+            "civil": 1634054640,
+            "nautical": 1634057280
+          }
+        },
+        "timezone": {
+          "name": "Europe/Riga",
+          "now_in_dst": 1,
+          "offset_sec": 10800,
+          "offset_string": "+0300",
+          "short_name": "EEST"
+        },
+        "what3words": {
+          "words": "toasted.reason.chair"
+        }
+      },
+      "bounds": {
+        "northeast": {
+          "lat": 56.8203151,
+          "lng": 24.6079502
+        },
+        "southwest": {
+          "lat": 56.8199862,
+          "lng": 24.6071573
+        }
+      },
+      "components": {
+        "ISO_3166-1_alpha-2": "LV",
+        "ISO_3166-1_alpha-3": "LVA",
+        "_category": "government",
+        "_type": "townhall",
+        "continent": "Europe",
+        "country": "Latvia",
+        "country_code": "lv",
+        "county": "Ogres novads",
+        "house_number": "33",
+        "political_union": "European Union",
+        "postcode": "LV-5001",
+        "road": "Br\u012bv\u012bbas iela",
+        "state": "Zemgale",
+        "suburb": "M\u0101lkalne",
+        "town": "Ogre",
+        "townhall": "Ogres novada dome"
+      },
+      "confidence": 9,
+      "formatted": "Ogres novada dome, Br\u012bv\u012bbas iela 33, Ogre, LV-5001, Latvia",
+      "geometry": {
+        "lat": 56.8201746,
+        "lng": 24.6074809
+      }
+    },
+    {
+      "annotations": {
+        "DMS": {
+          "lat": "56\u00b0 48' 50.44824'' N",
+          "lng": "24\u00b0 36' 3.12696'' E"
+        },
+        "MGRS": "35VLC5354899249",
+        "Maidenhead": "KO26ht25ci",
+        "Mercator": {
+          "x": 2738556.166,
+          "y": 7686409.64
+        },
+        "OSM": {
+          "edit_url": "https://www.openstreetmap.org/edit?way=256086298#map=16/56.81401/24.60087",
+          "note_url": "https://www.openstreetmap.org/note/new#map=16/56.81401/24.60087&layers=N",
+          "url": "https://www.openstreetmap.org/?mlat=56.81401&mlon=24.60087#map=16/56.81401/24.60087"
+        },
+        "UN_M49": {
+          "regions": {
+            "EUROPE": "150",
+            "LV": "428",
+            "NORTHERN_EUROPE": "154",
+            "WORLD": "001"
+          },
+          "statistical_groupings": [
+            "MEDC"
+          ]
+        },
+        "callingcode": 371,
+        "currency": {
+          "alternate_symbols": [],
+          "decimal_mark": ",",
+          "html_entity": "&#x20AC;",
+          "iso_code": "EUR",
+          "iso_numeric": "978",
+          "name": "Euro",
+          "smallest_denomination": 1,
+          "subunit": "Cent",
+          "subunit_to_unit": 100,
+          "symbol": "\u20ac",
+          "symbol_first": 0,
+          "thousands_separator": "."
+        },
+        "flag": "\ud83c\uddf1\ud83c\uddfb",
+        "geohash": "ud17py9v9g9nvrkqpr67",
+        "qibla": 156.11,
+        "roadinfo": {
+          "drive_on": "right",
+          "road": "Br\u012bv\u012bbas iela",
+          "road_type": "tertiary",
+          "speed_in": "km/h"
+        },
+        "sun": {
+          "rise": {
+            "apparent": 1634014140,
+            "astronomical": 1634006520,
+            "civil": 1634011860,
+            "nautical": 1634009220
+          },
+          "set": {
+            "apparent": 1634052360,
+            "astronomical": 1634059920,
+            "civil": 1634054640,
+            "nautical": 1634057280
+          }
+        },
+        "timezone": {
+          "name": "Europe/Riga",
+          "now_in_dst": 1,
+          "offset_sec": 10800,
+          "offset_string": "+0300",
+          "short_name": "EEST"
+        },
+        "what3words": {
+          "words": "estimate.urge.photos"
+        }
+      },
+      "bounds": {
+        "northeast": {
+          "lat": 56.8147092,
+          "lng": 24.6017395
+        },
+        "southwest": {
+          "lat": 56.8136625,
+          "lng": 24.6004372
+        }
+      },
+      "components": {
+        "ISO_3166-1_alpha-2": "LV",
+        "ISO_3166-1_alpha-3": "LVA",
+        "_category": "road",
+        "_type": "road",
+        "continent": "Europe",
+        "country": "Latvia",
+        "country_code": "lv",
+        "county": "Ogres novads",
+        "political_union": "European Union",
+        "postcode": "LV-5001",
+        "road": "Br\u012bv\u012bbas iela",
+        "road_type": "tertiary",
+        "state": "Zemgale",
+        "suburb": "Gr\u012bvas rajons",
+        "town": "Ogre"
+      },
+      "confidence": 9,
+      "formatted": "Br\u012bv\u012bbas iela, Ogre, LV-5001, Latvia",
+      "geometry": {
+        "lat": 56.8140134,
+        "lng": 24.6008686
+      }
+    },
+    {
+      "annotations": {
+        "DMS": {
+          "lat": "56\u00b0 49' 12.66996'' N",
+          "lng": "24\u00b0 39' 27.69012'' E"
+        },
+        "MGRS": "35VLC5704099816",
+        "Maidenhead": "KO26ht86wu",
+        "Mercator": {
+          "x": 2744881.684,
+          "y": 7687662.591
+        },
+        "OSM": {
+          "edit_url": "https://www.openstreetmap.org/edit?way=917944029#map=16/56.82019/24.65769",
+          "note_url": "https://www.openstreetmap.org/note/new#map=16/56.82019/24.65769&layers=N",
+          "url": "https://www.openstreetmap.org/?mlat=56.82019&mlon=24.65769#map=16/56.82019/24.65769"
+        },
+        "UN_M49": {
+          "regions": {
+            "EUROPE": "150",
+            "LV": "428",
+            "NORTHERN_EUROPE": "154",
+            "WORLD": "001"
+          },
+          "statistical_groupings": [
+            "MEDC"
+          ]
+        },
+        "callingcode": 371,
+        "currency": {
+          "alternate_symbols": [],
+          "decimal_mark": ",",
+          "html_entity": "&#x20AC;",
+          "iso_code": "EUR",
+          "iso_numeric": "978",
+          "name": "Euro",
+          "smallest_denomination": 1,
+          "subunit": "Cent",
+          "subunit_to_unit": 100,
+          "symbol": "\u20ac",
+          "symbol_first": 0,
+          "thousands_separator": "."
+        },
+        "flag": "\ud83c\uddf1\ud83c\uddfb",
+        "geohash": "ud1e1pg1tf7s967f1kwv",
+        "qibla": 156.19,
+        "roadinfo": {
+          "drive_on": "right",
+          "road": "Br\u012bv\u012bbas iela",
+          "road_type": "secondary",
+          "speed_in": "km/h"
+        },
+        "sun": {
+          "rise": {
+            "apparent": 1634014140,
+            "astronomical": 1634006520,
+            "civil": 1634011800,
+            "nautical": 1634009220
+          },
+          "set": {
+            "apparent": 1634052360,
+            "astronomical": 1634059920,
+            "civil": 1634054640,
+            "nautical": 1634057280
+          }
+        },
+        "timezone": {
+          "name": "Europe/Riga",
+          "now_in_dst": 1,
+          "offset_sec": 10800,
+          "offset_string": "+0300",
+          "short_name": "EEST"
+        },
+        "what3words": {
+          "words": "heady.artwork.squanders"
+        }
+      },
+      "bounds": {
+        "northeast": {
+          "lat": 56.8203347,
+          "lng": 24.657921
+        },
+        "southwest": {
+          "lat": 56.8199405,
+          "lng": 24.6573172
+        }
+      },
+      "components": {
+        "ISO_3166-1_alpha-2": "LV",
+        "ISO_3166-1_alpha-3": "LVA",
+        "_category": "road",
+        "_type": "road",
+        "continent": "Europe",
+        "country": "Latvia",
+        "country_code": "lv",
+        "county": "Ogres novads",
+        "political_union": "European Union",
+        "road": "Br\u012bv\u012bbas iela",
+        "road_type": "secondary",
+        "state": "Zemgale",
+        "suburb": "La\u0161upes",
+        "town": "Ogre",
+        "village": "L\u012bbie\u0161kalns"
+      },
+      "confidence": 9,
+      "formatted": "Br\u012bv\u012bbas iela, Ogre, Latvia",
+      "geometry": {
+        "lat": 56.8201861,
+        "lng": 24.6576917
+      }
+    },
+    {
+      "annotations": {
+        "DMS": {
+          "lat": "56\u00b0 49' 24.55608'' N",
+          "lng": "24\u00b0 39' 47.31264'' E"
+        },
+        "MGRS": "35VLD5738500172",
+        "Maidenhead": "KO26ht97np",
+        "Mercator": {
+          "x": 2745488.453,
+          "y": 7688332.865
+        },
+        "OSM": {
+          "edit_url": "https://www.openstreetmap.org/edit?way=874767211#map=16/56.82349/24.66314",
+          "note_url": "https://www.openstreetmap.org/note/new#map=16/56.82349/24.66314&layers=N",
+          "url": "https://www.openstreetmap.org/?mlat=56.82349&mlon=24.66314#map=16/56.82349/24.66314"
+        },
+        "UN_M49": {
+          "regions": {
+            "EUROPE": "150",
+            "LV": "428",
+            "NORTHERN_EUROPE": "154",
+            "WORLD": "001"
+          },
+          "statistical_groupings": [
+            "MEDC"
+          ]
+        },
+        "callingcode": 371,
+        "currency": {
+          "alternate_symbols": [],
+          "decimal_mark": ",",
+          "html_entity": "&#x20AC;",
+          "iso_code": "EUR",
+          "iso_numeric": "978",
+          "name": "Euro",
+          "smallest_denomination": 1,
+          "subunit": "Cent",
+          "subunit_to_unit": 100,
+          "symbol": "\u20ac",
+          "symbol_first": 0,
+          "thousands_separator": "."
+        },
+        "flag": "\ud83c\uddf1\ud83c\uddfb",
+        "geohash": "ud1e30rhucggupk7eghs",
+        "qibla": 156.2,
+        "roadinfo": {
+          "drive_on": "right",
+          "road": "Br\u012bv\u012bbas iela",
+          "road_type": "secondary",
+          "speed_in": "km/h"
+        },
+        "sun": {
+          "rise": {
+            "apparent": 1634014140,
+            "astronomical": 1634006520,
+            "civil": 1634011800,
+            "nautical": 1634009220
+          },
+          "set": {
+            "apparent": 1634052360,
+            "astronomical": 1634059920,
+            "civil": 1634054640,
+            "nautical": 1634057280
+          }
+        },
+        "timezone": {
+          "name": "Europe/Riga",
+          "now_in_dst": 1,
+          "offset_sec": 10800,
+          "offset_string": "+0300",
+          "short_name": "EEST"
+        },
+        "what3words": {
+          "words": "redoubts.gauze.furthering"
+        }
+      },
+      "bounds": {
+        "northeast": {
+          "lat": 56.8243388,
+          "lng": 24.6692097
+        },
+        "southwest": {
+          "lat": 56.8204119,
+          "lng": 24.658034
+        }
+      },
+      "components": {
+        "ISO_3166-1_alpha-2": "LV",
+        "ISO_3166-1_alpha-3": "LVA",
+        "_category": "road",
+        "_type": "road",
+        "city": "Ogresgala pagasts",
+        "continent": "Europe",
+        "country": "Latvia",
+        "country_code": "lv",
+        "county": "Ogres novads",
+        "political_union": "European Union",
+        "road": "Br\u012bv\u012bbas iela",
+        "road_type": "secondary",
+        "state": "Zemgale",
+        "village": "L\u012bbie\u0161kalns"
+      },
+      "confidence": 9,
+      "formatted": "Br\u012bv\u012bbas iela, Ogresgala pagasts, Latvia",
+      "geometry": {
+        "lat": 56.8234878,
+        "lng": 24.6631424
+      }
+    },
+    {
+      "annotations": {
+        "DMS": {
+          "lat": "56\u00b0 52' 32.91600'' N",
+          "lng": "25\u00b0 6' 11.05200'' E"
+        },
+        "MGRS": "35VLD8439005164",
+        "Maidenhead": "KO26nv20ie",
+        "Mercator": {
+          "x": 2794460.97,
+          "y": 7698962.645
+        },
+        "OSM": {
+          "note_url": "https://www.openstreetmap.org/note/new#map=16/56.87581/25.10307&layers=N",
+          "url": "https://www.openstreetmap.org/?mlat=56.87581&mlon=25.10307#map=16/56.87581/25.10307"
+        },
+        "UN_M49": {
+          "regions": {
+            "EUROPE": "150",
+            "LV": "428",
+            "NORTHERN_EUROPE": "154",
+            "WORLD": "001"
+          },
+          "statistical_groupings": [
+            "MEDC"
+          ]
+        },
+        "callingcode": 371,
+        "currency": {
+          "alternate_symbols": [],
+          "decimal_mark": ",",
+          "html_entity": "&#x20AC;",
+          "iso_code": "EUR",
+          "iso_numeric": "978",
+          "name": "Euro",
+          "smallest_denomination": 1,
+          "subunit": "Cent",
+          "subunit_to_unit": 100,
+          "symbol": "\u20ac",
+          "symbol_first": 0,
+          "thousands_separator": "."
+        },
+        "flag": "\ud83c\uddf1\ud83c\uddfb",
+        "geohash": "ud1ge1zmxgmwj9ctuk4t",
+        "qibla": 156.89,
+        "roadinfo": {
+          "drive_on": "right",
+          "speed_in": "km/h"
+        },
+        "sun": {
+          "rise": {
+            "apparent": 1634014020,
+            "astronomical": 1634006400,
+            "civil": 1634011740,
+            "nautical": 1634009100
+          },
+          "set": {
+            "apparent": 1634052240,
+            "astronomical": 1634059800,
+            "civil": 1634054520,
+            "nautical": 1634057160
+          }
+        },
+        "timezone": {
+          "name": "Europe/Riga",
+          "now_in_dst": 1,
+          "offset_sec": 10800,
+          "offset_string": "+0300",
+          "short_name": "EEST"
+        },
+        "what3words": {
+          "words": "units.bucks.fishlike"
+        }
+      },
+      "bounds": {
+        "northeast": {
+          "lat": 56.9636955,
+          "lng": 25.3743324
+        },
+        "southwest": {
+          "lat": 56.6054573,
+          "lng": 24.3516254
+        }
+      },
+      "components": {
+        "ISO_3166-1_alpha-2": "LV",
+        "ISO_3166-1_alpha-3": "LVA",
+        "_category": "place",
+        "_type": "state",
+        "continent": "Europe",
+        "country": "Latvia",
+        "country_code": "lv",
+        "political_union": "European Union",
+        "state": "Ogre"
+      },
+      "confidence": 1,
+      "formatted": "Ogre, Latvia",
+      "geometry": {
+        "lat": 56.87581,
+        "lng": 25.10307
+      }
+    }
+  ],
+  "status": {
+    "code": 200,
+    "message": "OK"
+  },
+  "stay_informed": {
+    "blog": "https://blog.opencagedata.com",
+    "twitter": "https://twitter.com/OpenCage"
+  },
+  "thanks": "For using an OpenCage API",
+  "timestamp": {
+    "created_http": "Tue, 12 Oct 2021 15:29:07 GMT",
+    "created_unix": 1634052547
+  },
+  "total_results": 5
+}

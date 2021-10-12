@@ -1,7 +1,5 @@
 package lv.lumii.balticlsc.module;
 
-import com.fasterxml.jackson.databind.MapperFeature;
-import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;

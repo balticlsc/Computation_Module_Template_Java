@@ -68,7 +68,7 @@ public class JobController {
     @PostConstruct
     public void init() {
         try {
-            logger.info("Module initialization started (version 01-OCT-2021)");
+            logger.info("Module initialization started (version 12-OCT-2021 1)");
             
             logger.debug("Module environment variables: ");
             logger.debug("SYS_MODULE_INSTANCE_UID = " + ModuleUID);
@@ -225,7 +225,7 @@ public class JobController {
             document = null;
 
             this.status = 2;
-        }, document);
+        }, document, restTemplate);
         Future<Integer> future = this.taskThreadPool.submit(job);
 
         this.status = 1;
