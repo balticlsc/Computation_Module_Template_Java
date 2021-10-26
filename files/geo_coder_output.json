@@ -1,0 +1,30 @@
+[
+  {
+    "location": {
+      "latitude": "56.8201746",
+      "longitude": "24.6074809"
+    },
+    "uid": "aaaa1a"
+  },
+  {
+    "location": {
+      "latitude": "56.946",
+      "longitude": "24.10589"
+    },
+    "uid": "dgdfg"
+  },
+  {
+    "location": {
+      "latitude": "56.946",
+      "longitude": "24.10589"
+    },
+    "uid": "88888"
+  },
+  {
+    "location": {
+      "latitude": "52.2216391",
+      "longitude": "21.0073796"
+    },
+    "uid": "zzzzzz"
+  }
+]

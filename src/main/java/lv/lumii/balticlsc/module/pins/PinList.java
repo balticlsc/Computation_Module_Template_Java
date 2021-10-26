@@ -2,8 +2,8 @@ package lv.lumii.balticlsc.module.pins;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @JsonDeserialize(using = PinListDeserializer.class)
 public class PinList {
@@ -20,4 +20,14 @@ public class PinList {
     public Pin getPin(String key) {
         return Pins.getOrDefault(key, null);
     }
+
+    public Collection<Pin> getPins() { return Pins.values(); }
+
+    public Collection<Pin> getInputPins() {return Pins.values().stream()
+                                                 .filter(pin -> { return pin.getPinType().equals("input");})
+                                                 .collect(Collectors.toList());};
+
+    public Collection<Pin> getOutputPins() {return Pins.values().stream()
+            .filter(pin -> { return pin.getPinType().equals("output");})
+            .collect(Collectors.toList());};
 }

@@ -1,0 +1,155 @@
+[
+  {
+    "from": {
+      "location": {
+        "latitude": "56.8201746",
+        "longitude": "24.6074809"
+      },
+      "uid": "aaaa1a"
+    },
+    "to": {
+      "location": {
+        "latitude": "56.8201746",
+        "longitude": "24.6074809"
+      },
+      "uid": "aaaa1a"
+    },
+    "distance": 0.0
+  },
+  {
+    "from": {
+      "location": {
+        "latitude": "56.8201746",
+        "longitude": "24.6074809"
+      },
+      "uid": "aaaa1a"
+    },
+    "to": {
+      "location": {
+        "latitude": "56.817743",
+        "longitude": "24.5746405"
+      },
+      "uid": "aaaa2a"
+    },
+    "distance": 2676.617790772902
+  },
+  {
+    "from": {
+      "location": {
+        "latitude": "56.8201746",
+        "longitude": "24.6074809"
+      },
+      "uid": "aaaa1a"
+    },
+    "to": {
+      "location": {
+        "latitude": "56.8181393",
+        "longitude": "24.5993851"
+      },
+      "uid": "aaaa3a"
+    },
+    "distance": 1074.0608705104792
+  },
+  {
+    "from": {
+      "location": {
+        "latitude": "56.817743",
+        "longitude": "24.5746405"
+      },
+      "uid": "aaaa2a"
+    },
+    "to": {
+      "location": {
+        "latitude": "56.8201746",
+        "longitude": "24.6074809"
+      },
+      "uid": "aaaa1a"
+    },
+    "distance": 2775.5337907729026
+  },
+  {
+    "from": {
+      "location": {
+        "latitude": "56.817743",
+        "longitude": "24.5746405"
+      },
+      "uid": "aaaa2a"
+    },
+    "to": {
+      "location": {
+        "latitude": "56.817743",
+        "longitude": "24.5746405"
+      },
+      "uid": "aaaa2a"
+    },
+    "distance": 0.0
+  },
+  {
+    "from": {
+      "location": {
+        "latitude": "56.817743",
+        "longitude": "24.5746405"
+      },
+      "uid": "aaaa2a"
+    },
+    "to": {
+      "location": {
+        "latitude": "56.8181393",
+        "longitude": "24.5993851"
+      },
+      "uid": "aaaa3a"
+    },
+    "distance": 2139.9956269764275
+  },
+  {
+    "from": {
+      "location": {
+        "latitude": "56.8181393",
+        "longitude": "24.5993851"
+      },
+      "uid": "aaaa3a"
+    },
+    "to": {
+      "location": {
+        "latitude": "56.8201746",
+        "longitude": "24.6074809"
+      },
+      "uid": "aaaa1a"
+    },
+    "distance": 1044.7328705104792
+  },
+  {
+    "from": {
+      "location": {
+        "latitude": "56.8181393",
+        "longitude": "24.5993851"
+      },
+      "uid": "aaaa3a"
+    },
+    "to": {
+      "location": {
+        "latitude": "56.817743",
+        "longitude": "24.5746405"
+      },
+      "uid": "aaaa2a"
+    },
+    "distance": 2143.578626976428
+  },
+  {
+    "from": {
+      "location": {
+        "latitude": "56.8181393",
+        "longitude": "24.5993851"
+      },
+      "uid": "aaaa3a"
+    },
+    "to": {
+      "location": {
+        "latitude": "56.8181393",
+        "longitude": "24.5993851"
+      },
+      "uid": "aaaa3a"
+    },
+    "distance": 0.0
+  }
+]

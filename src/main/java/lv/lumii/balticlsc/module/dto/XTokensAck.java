@@ -17,10 +17,8 @@ public class XTokensAck {
     @JsonProperty("Note")
     private String note;
 
-    public XTokensAck(String senderUid, String msgUid, boolean isFinal, boolean isFailed, String note) {
+    public XTokensAck(String senderUid, List<String> msgUids, boolean isFinal, boolean isFailed, String note) {
         setSenderUid(senderUid);
-        List<String> msgUids = new ArrayList<>();
-        msgUids.add(msgUid);
         setMsgUids(msgUids);
         setFinal(isFinal);
         setFailed(isFailed);

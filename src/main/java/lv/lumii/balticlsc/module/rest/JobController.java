@@ -1,14 +1,13 @@
 package lv.lumii.balticlsc.module.rest;
 
-import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import lv.lumii.balticlsc.module.data.DataItem;
 import lv.lumii.balticlsc.module.dto.XInputTokenMessage;
 import lv.lumii.balticlsc.module.dto.XJobStatus;
 import lv.lumii.balticlsc.module.dto.XOutputTokenMessage;
@@ -29,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
+import javax.xml.crypto.Data;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -36,6 +36,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -56,8 +57,8 @@ public class JobController {
 
     private PinList pinList = new PinList();
     private byte status;
-    private JsonNode values;
-    private Document document;
+
+    private List<DataItem> dataItems = new ArrayList<>();
 
     @Autowired
     private ExecutorService taskThreadPool;
@@ -68,7 +69,7 @@ public class JobController {
     @PostConstruct
     public void init() {
         try {
-            logger.info("Module initialization started (version 12-OCT-2021 1)");
+            logger.info("Module initialization started (version 26-OCT-2021 Geo Router 1)");
             
             logger.debug("Module environment variables: ");
             logger.debug("SYS_MODULE_INSTANCE_UID = " + ModuleUID);
@@ -82,6 +83,7 @@ public class JobController {
             logger.debug(pinConfigFileContentStringExtended);
             pinList = new ObjectMapper().readValue(pinConfigFileContentStringExtended, PinList.class);
             logger.debug(pinList.toString());
+
             status = 2; // Completed/Ready
 
             logger.info("Module initialized.");
@@ -97,54 +99,48 @@ public class JobController {
         }
     }
 
-    private boolean checkToken(XInputTokenMessage token) {
+    // Returns 0=OK, 1=corrupted-token, 2=bad-credentials
+    private Integer checkTokenCompleteness(XInputTokenMessage token) {
         Pin pin = pinList.getPin(token.getPinName());
         if (pin == null) {
             logger.debug("no pin found in the pin list");
-            return false;
+            return 1;
         }
-        if (!pin.getPinType().equalsIgnoreCase("input")) return false;
+        if (!pin.getPinType().equalsIgnoreCase("input")) return 1;
 
         try {
             ObjectMapper mapper = new ObjectMapper();
-            values = mapper.readTree(token.getValues());
+            JsonNode values = mapper.readTree(token.getValues());
             logger.debug(values.toPrettyString());
 
-            if (values.get("FileName") == null) return false;
-            if (values.get("ObjectId") == null) return false;
-            if (values.get("Database") == null) return false;
-            if (values.get("Collection") == null) return false;
+            if (values.get("FileName") == null) return 1;
+            if (values.get("ObjectId") == null) return 1;
+            if (values.get("Database") == null) return 1;
+            if (values.get("Collection") == null) return 1;
+
+            HostAccessCredential ac = (HostAccessCredential) pin.getAccessCredential();
+            if (ac == null) { return 2; }
+
+            try (MongoClient mongoClient = MongoClients.create(ac.getConnectionString())) {
+                MongoDatabase db = mongoClient.getDatabase(values.get("Database").asText());
+                MongoCollection<Document> col = db.getCollection(values.get("Collection").asText());
+
+                Document document = col.find(eq("_id", new ObjectId(values.get("ObjectId").asText()))).first();
+                if (document == null) return 2;
+
+                dataItems.add(new DataItem(pin.getPinName(), document, token.getMsgUid()));
+
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+                return 2;
+            }
 
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return false;
+            return 1;
         }
 
-        return true;
-    }
-
-    private boolean checkResponse(XInputTokenMessage token) {
-        return true;
-    }
-
-    private boolean checkCredentials(XInputTokenMessage token) {
-        Pin pin = pinList.getPin(token.getPinName());
-        HostAccessCredential ac = (HostAccessCredential) pin.getAccessCredential();
-        if (ac == null) { return false; }
-
-        try (MongoClient mongoClient = MongoClients.create(ac.getConnectionString())) {
-            MongoDatabase db = mongoClient.getDatabase(values.get("Database").asText());
-            MongoCollection<Document> col = db.getCollection(values.get("Collection").asText());
-
-            document = col.find(eq("_id", new ObjectId(values.get("ObjectId").asText()))).first();
-            if (document == null) return false;
-
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
+        return 0;
     }
 
 
@@ -155,80 +151,106 @@ public class JobController {
         logger.debug("Token message recieved. MsgUid="+token.getMsgUid()+" PinName="+token.getPinName()+ "\n"+
                 "Values= "+token.getValues());
 
-        if (!this.checkToken(token)) {
-             return ResponseEntity.badRequest()
-                                  .body("corrupted-token");
+        switch (this.checkTokenCompleteness(token)) {
+            case 1:
+                return ResponseEntity.badRequest()
+                        .body("corrupted-token");
+            case 2:
+                return ResponseEntity.status(401)
+                        .body("bad-credentials");
+            case 3:
+                return ResponseEntity.notFound()
+                        .build();
+            default:
         }
 
-        if (!this.checkResponse(token)) {
-            return ResponseEntity.notFound()
-                                 .build();
-        }
+        // Since we can have multiple input tokens, we should ensure that all of them are here and then fire the job!
+        if (pinList.getInputPins().stream()
+                                      .allMatch(pin -> {return dataItems.stream().
+                                                            anyMatch(dataItem -> {return dataItem.getPinName().equals(pin.getPinName());}); })) {
 
-        if (!this.checkCredentials(token)) {
-            return ResponseEntity.status(401)
-                                  .body("bad-credentials");
-        }
+            List<DataItem> all_data_items = pinList.getInputPins().stream()
+                    .map(pin -> { return dataItems.stream().filter(dataItem -> { return dataItem.getPinName().equals(pin.getPinName());})
+                                                           .findFirst().get();})
+                    .collect(Collectors.toList());
 
-        Job job = new Job((output_document) -> {
+            Job job = new Job((output_data_item) -> {
 
-            logger.debug(output_document.toJson());
-            Pin pin = pinList.getPin("OPIN");
-            HostAccessCredential ac = (HostAccessCredential) pin.getAccessCredential();
+                dataItems.add(output_data_item);
 
-            String mongo_db_name = "baltic_database_"+ UUID.randomUUID().toString().substring(0,7);
-            String mongo_col_name = "baltic_collection_"+ UUID.randomUUID().toString().substring(0,7);
+                Pin opin = pinList.getPin(output_data_item.getPinName());
+                HostAccessCredential ac = (HostAccessCredential) opin.getAccessCredential();
 
-            try (MongoClient mongoClient = MongoClients.create(ac.getConnectionString())) {
+                String mongo_db_name = "baltic_database_"+ UUID.randomUUID().toString().substring(0,7);
+                String mongo_col_name = "baltic_collection_"+ UUID.randomUUID().toString().substring(0,7);
 
-                // insert document into Mongo DB
-                MongoDatabase db = mongoClient.getDatabase(mongo_db_name);
-                MongoCollection<Document> col = db.getCollection(mongo_col_name);
-                col.insertOne(output_document);
+                try (MongoClient mongoClient = MongoClients.create(ac.getConnectionString())) {
 
-                Map<String, Object> values_map = new HashMap<>();
-                values_map.put("FileName", output_document.getString("fileName"));
-                values_map.put("ObjectId", output_document.get("_id").toString());
-                values_map.put("Database", mongo_db_name);
-                values_map.put("Collection", mongo_col_name);
+                    // insert document into Mongo DB
+                    MongoDatabase db = mongoClient.getDatabase(mongo_db_name);
+                    MongoCollection<Document> col = db.getCollection(mongo_col_name);
+                    col.insertOne(output_data_item.getDocument());
 
-                ObjectMapper mapper = new ObjectMapper();
-                String out_values = mapper.writeValueAsString(values_map);
+                    // prepare OutputTokenMessage
+                    Map<String, Object> values_map = new HashMap<>();
+                    values_map.put("FileName", output_data_item.getDocument().getString("fileName"));
+                    values_map.put("ObjectId", output_data_item.getDocument().get("_id").toString());
+                    values_map.put("Database", mongo_db_name);
+                    values_map.put("Collection", mongo_col_name);
+                    ObjectMapper mapper = new ObjectMapper();
+                    String out_values = mapper.writeValueAsString(values_map);
 
-                XOutputTokenMessage out_token = new XOutputTokenMessage("OPIN",
-                        this.getModuleUID(), out_values, token.getMsgUid(), true);
+                    XOutputTokenMessage out_token = new XOutputTokenMessage(output_data_item.getPinName(),
+                            this.getModuleUID(), out_values, token.getMsgUid(), true);
+                    logger.debug(out_token.toString());
 
-                XTokensAck out_ack_token = new XTokensAck(this.getModuleUID(),
-                        token.getMsgUid(), true, false, "");
+                    //Send PutTokenMessage
+                    try {
+                        ResponseEntity<String> res1 = restTemplate.postForEntity(this.TokenEndpoint, out_token, String.class);
+                        logger.debug(res1.getStatusCode().toString());
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                    // if all output tokens have been sent - send ack message
+                    if (pinList.getOutputPins().stream()
+                            .allMatch(pin -> {return dataItems.stream().
+                                    anyMatch(dataItem -> {return dataItem.getPinName().equals(pin.getPinName());}); })) {
 
-                logger.debug(out_token.toString());
-                logger.debug(out_ack_token.toString());
+                        List<DataItem> input_data_items = pinList.getInputPins().stream()
+                                .map(pin -> { return dataItems.stream()
+                                        .filter(dataItem  -> {return dataItem.getPinName().equals(pin.getPinName());}).findFirst().get();})
+                                .collect(Collectors.toList());
 
-                //PutTokenMessage
-                try {
-                    ResponseEntity<String> res1 = restTemplate.postForEntity(this.TokenEndpoint, out_token, String.class);
-                    logger.debug(res1.getStatusCode().toString());
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                        List<String> ack_tocken_ids = input_data_items.stream()
+                                .map(data_item -> { return data_item.getMsgId();})
+                                .collect(Collectors.toList());
+
+                        // Prepare Tokens Ack Message
+                        XTokensAck out_ack_token = new XTokensAck(this.getModuleUID(),
+                                ack_tocken_ids, true, false, "");
+                        logger.debug(out_ack_token.toString());
+
+                        //FinalizeTokenMessageProcessing
+                        ResponseEntity<String> res2 = restTemplate.postForEntity(this.AckEndpoint, out_ack_token, String.class);
+                        logger.debug(res2.getStatusCode().toString());
+
+                        // do NOT forget to reset all token-specific fields
+                        pinList.getPins().forEach(pin -> {
+                            dataItems.clear();
+                        });
+
+                        this.status = 2;
+                    }
+                } catch (IllegalArgumentException | JsonProcessingException e) {
+                    e.printStackTrace();
                 }
+            }, all_data_items, restTemplate);
+            Future<Integer> future = this.taskThreadPool.submit(job);
+            this.status = 1; // Working - not all input tokens processed
 
-                //FinalizeTokenMessageProcessing
-                ResponseEntity<String> res2 = restTemplate.postForEntity(this.AckEndpoint, out_ack_token, String.class);
-                logger.debug(res2.getStatusCode().toString());
-
-            } catch (IllegalArgumentException | JsonProcessingException e) {
-                e.printStackTrace();
-            }
-
-            // do NOT forget to reset all token-specific fields
-            values = null;
-            document = null;
-
-            this.status = 2;
-        }, document, restTemplate);
-        Future<Integer> future = this.taskThreadPool.submit(job);
-
-        this.status = 1;
+        } else {
+            this.status = 0; // Idle - Waiting for data
+        }
 
         return ResponseEntity.ok()
                              .body("OK");

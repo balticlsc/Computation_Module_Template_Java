@@ -11,35 +11,24 @@
     }
   },
   {
-    "uid": "dgdfg",
+    "uid": "aaaa2a",
     "address": {
       "country": "Latvia",
-      "administrativeArea":"Rīgas pilsēta",
-      "locality": "Rīga",
-      "postalCode": "LV-1459",
-      "thoroughfare": "Raiņa bulvāris 29",
+      "administrativeArea":"Ogres pilsēta",
+      "locality": "Ogre",
+      "postalCode": "LV-5001",
+      "thoroughfare": "Rīgas iela 33",
       "premise": ""
     }
   },
   {
-    "uid": "88888",
+    "uid": "aaaa3a",
     "address": {
       "country": "Latvia",
-      "administrativeArea":"Rīgas pilsēta",
-      "locality": "Rīga",
-      "postalCode": "LV-1586",
-      "thoroughfare": "Raiņa bulvāris 19",
-      "premise": ""
-    }
-  },
-  {
-    "uid": "zzzzzz",
-    "address": {
-      "country": "Poland",
-      "administrativeArea":"",
-      "locality": "Warszawa",
-      "postalCode": "00-661",
-      "thoroughfare": "plac Politechniki 1",
+      "administrativeArea":"Ogres pilsēta",
+      "locality": "Ogre",
+      "postalCode": "LV-5001",
+      "thoroughfare": "Meža prospekts 1",
       "premise": ""
     }
   }
