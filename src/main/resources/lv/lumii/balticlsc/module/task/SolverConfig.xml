@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+  <!--<environmentMode>FULL_ASSERT</environmentMode>--><!-- To slowly prove there are no bugs in this code -->
+  <!--<moveThreadCount>AUTO</moveThreadCount>--><!-- To solve faster by saturating multiple CPU cores -->
+
+  <solutionClass>lv.lumii.balticlsc.module.domain.CVRPSolution</solutionClass>
+  <entityClass>lv.lumii.balticlsc.module.domain.Customer</entityClass>
+  <entityClass>lv.lumii.balticlsc.module.domain.RouteElement</entityClass>
+
+  <scoreDirectorFactory>
+    <scoreDrl>lv/lumii/balticlsc/module/task/DroolsConstraints.drl</scoreDrl>
+  </scoreDirectorFactory>
+
+  <termination>
+    <unimprovedSecondsSpentLimit>30</unimprovedSecondsSpentLimit>
+  </termination>
+  <constructionHeuristic>
+    <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
+  </constructionHeuristic>
+  <localSearch>
+    <unionMoveSelector>
+      <changeMoveSelector>
+        <!--<entitySelector id="entitySelector1"/>
+        <valueSelector>
+          <nearbySelection>
+            <originEntitySelector mimicSelectorRef="entitySelector1"/>
+            <nearbyDistanceMeterClass>lv.lumii.balticlsc.module.domain.CVRPCustomerDistanceMeter</nearbyDistanceMeterClass>
+            <parabolicDistributionSizeMaximum>40</parabolicDistributionSizeMaximum>
+          </nearbySelection>
+        </valueSelector>-->
+      </changeMoveSelector>
+      <swapMoveSelector>
+        <!--<entitySelector id="entitySelector2"/>
+        <secondaryEntitySelector>
+          <nearbySelection>
+            <originEntitySelector mimicSelectorRef="entitySelector2"/>
+            <nearbyDistanceMeterClass>lv.lumii.balticlsc.module.domain.CVRPCustomerDistanceMeter</nearbyDistanceMeterClass>
+            <parabolicDistributionSizeMaximum>40</parabolicDistributionSizeMaximum>
+          </nearbySelection>
+        </secondaryEntitySelector> -->
+      </swapMoveSelector>
+      <tailChainSwapMoveSelector>
+        <!--<entitySelector id="entitySelector3"/>
+        <valueSelector>
+          <nearbySelection>
+            <originEntitySelector mimicSelectorRef="entitySelector3"/>
+            <nearbyDistanceMeterClass>lv.lumii.balticlsc.module.domain.CVRPCustomerDistanceMeter</nearbyDistanceMeterClass>
+            <parabolicDistributionSizeMaximum>40</parabolicDistributionSizeMaximum>
+          </nearbySelection>
+        </valueSelector>-->
+      </tailChainSwapMoveSelector>
+    </unionMoveSelector>
+    <acceptor>
+      <lateAcceptanceSize>200</lateAcceptanceSize>
+    </acceptor>
+    <forager>
+      <acceptedCountLimit>1</acceptedCountLimit>
+    </forager>
+  </localSearch>
+</solver>

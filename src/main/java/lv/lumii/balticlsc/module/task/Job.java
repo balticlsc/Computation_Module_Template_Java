@@ -3,10 +3,6 @@ package lv.lumii.balticlsc.module.task;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.graphhopper.GHRequest;
-import com.graphhopper.GHResponse;
-import com.graphhopper.GraphHopper;
-import com.graphhopper.config.Profile;
 import lv.lumii.balticlsc.module.data.DataItem;
 import lv.lumii.balticlsc.module.domain.XDistance;
 import lv.lumii.balticlsc.module.domain.XLocationObject;
@@ -85,34 +81,12 @@ public class Job implements Callable {
         }
 
         // THE MAIN JOB!!!!
-        List<XDistance> distances = new ArrayList<>();
-        GraphHopper hopper = new GraphHopper();
-        hopper.setOSMFile(mapFileName);
-        hopper.setGraphHopperLocation("/tmp/Hopper");
-        hopper.setProfiles(new Profile("car").setVehicle("car").setWeighting("shortest").setTurnCosts(false));
-        hopper.importOrLoad();
-        logger.debug("Hopper initialized. Calculation started ...");
-
-        for (XLocationObject loc : listOfLocations) {
-            for (XLocationObject loc2: listOfLocations) {
-                GHRequest req = new GHRequest(Double.parseDouble(loc.getLocation().getLatitude()), Double.parseDouble(loc.getLocation().getLongitude()),
-                        Double.parseDouble(loc2.getLocation().getLatitude()), Double.parseDouble(loc2.getLocation().getLongitude()))
-                                   .setProfile("car").setLocale(Locale.US);
-                GHResponse rsp = hopper.route(req);
-                if (!rsp.hasErrors()) {
-                    XDistance distance = new XDistance(loc, loc2, rsp.getBest().getDistance());
-                    distances.add(distance);
-                    logger.debug("Distance between "+loc.getUID()+" and "+loc2.getUID()+"calculated. " + distance.getDistance().toString());
-                }
-            }
-        }
-        logger.debug("Distances calculated");
 
         // Serialization
         logger.debug("Serialization started ...");
         String outputFileContentAsString ="";
         try {
-            outputFileContentAsString = mapper.writeValueAsString(distances);
+            //outputFileContentAsString = mapper.writeValueAsString(distances);
         } catch (Exception ex) {
             logger.error("Error serializing distances array");
             ex.printStackTrace();

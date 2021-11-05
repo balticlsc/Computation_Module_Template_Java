@@ -1,6 +1,10 @@
 package lv.lumii.balticlsc.module.data;
 
 import org.bson.Document;
+import org.bson.types.Binary;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class DataItem {
     private String pinName;
@@ -13,6 +17,30 @@ public class DataItem {
         setDocument(document);
         setMsgId(msgId);
         setPinName(pinName);
+    }
+
+    public String extractStringDataFromDataItem() {
+
+        //String fileName = this.getDocument().getString("fileName");
+        Binary binaryFileContent = this.getDocument().get("fileContent", Binary.class);
+        String fileContentAsString = "";
+        try {
+            fileContentAsString = new String(binaryFileContent.getData());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return fileContentAsString;
+    }
+
+    public String SaveDataItemToFile() throws IOException {
+        String fileName = this.getDocument().getString("fileName");
+        Binary binaryFileContent = this.getDocument().get("fileContent", Binary.class);
+
+        FileOutputStream fos = new FileOutputStream("/tmp/" + fileName);
+        fos.write(binaryFileContent.getData());
+        fos.close();
+
+        return "/tmp/" + fileName;
     }
 
     public String getPinName() {

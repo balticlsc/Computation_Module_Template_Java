@@ -1,0 +1,70 @@
+package lv.lumii.balticlsc.module.task;
+    dialect "java";
+
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
+import java.util.ArrayList;
+import lv.lumii.balticlsc.module.domain.Vehicle;
+import lv.lumii.balticlsc.module.domain.Customer;
+import lv.lumii.balticlsc.module.domain.DistanceMatrix;
+
+
+global HardSoftScoreHolder scoreHolder;
+
+rule "CapacityOverflow"
+    when
+        $vehicle : Vehicle($capacity: capacity)
+        accumulate(
+                    Customer(
+                        vehicle == $vehicle,
+                        $demand : demand);
+                    $demandTotal : sum($demand);
+                    $demandTotal > $capacity
+                )
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, (int)(($capacity - $demandTotal)*1000.0));
+end
+
+rule "GhostCarUsedRealNot"
+    when
+        Vehicle(ghostVehicle == false, nextCustomer == null, $id: id)
+        Vehicle(ghostVehicle == true, $id == id, nextCustomer != null)
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, - 100000);
+end
+
+
+rule "distanceToNextCustomer"
+    when
+        $matrix: DistanceMatrix()
+        $customer : Customer(nextCustomer != null, $nextCustomer: nextCustomer)
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, - $customer.getLocation().getDistance($nextCustomer.getLocation(),$matrix));
+end
+
+
+rule "distanceToFirstCustomer"
+    when
+        $matrix: DistanceMatrix()
+        $vehicle : Vehicle(nextCustomer != null, $nextCustomer: nextCustomer)
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, - $vehicle.getCurrentLocation().getDistance($nextCustomer.getLocation(),$matrix));
+end
+
+
+rule "distanceToLandfill"
+    when
+        $matrix: DistanceMatrix()
+        $customer : Customer(nextCustomer == null, vehicle != null, $vehicle: vehicle)
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, - $customer.getLocation().getDistance($vehicle.getLandfill(),$matrix));
+end
+
+/*
+rule "distanceBackToDepo"
+    when
+        $matrix: DistanceMatrix()
+        $vehicle : Vehicle(ghostVehicle == false, nextCustomer != null)
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, - $vehicle.getLandfill().getDistance($vehicle.getDepot(),$matrix));
+end
+*/

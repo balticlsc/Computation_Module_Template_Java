@@ -20,7 +20,7 @@ public class DemoModuleApplication {
 
 		return builder
 				.setConnectTimeout(Duration.ofMillis(3000))
-				.setReadTimeout(Duration.ofMillis(10000))
+				.setReadTimeout(Duration.ofMillis(20000))
 				.build();
 	}
 }

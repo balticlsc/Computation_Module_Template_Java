@@ -8,9 +8,7 @@
       "postalCode": "LV-5001",
       "thoroughfare": "Brīvības iela 33",
       "premise": ""
-    },
-    "maxCapacity": 10.0,
-    "type": 1
+    }
   },
   {
     "uid": "aaaaC2a",
@@ -21,9 +19,7 @@
       "postalCode": "LV-5001",
       "thoroughfare": "Rīgas iela 33",
       "premise": ""
-    },
-    "capacity": 1.0,
-    "type": 2
+    }
   },
   {
     "uid": "aaaaC1a",
@@ -34,9 +30,7 @@
       "postalCode": "LV-5001",
       "thoroughfare": "Meža prospekts 1",
       "premise": ""
-    },
-    "capacity": 2.0,
-    "type": 2
+    }
   },
   {
     "uid": "aaaaWFa",
@@ -47,7 +41,6 @@
       "postalCode": "LV-5001",
       "thoroughfare": "Akmeņu iela 43B ",
       "premise": ""
-    },
-    "type": 0
+    }
   }
 ]
